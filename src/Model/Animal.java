@@ -1,11 +1,11 @@
 package Model;
 
-public class Animali {
+public class Animal {
     private int id;
-    private String specie;
-    private String soprannome;
-    private boolean adottatp;
-    private boolean pericolo;
+    private String species;
+    private String nickname;
+    private boolean adopt;
+    private boolean inDanger;
 
     public int getId() {
         return id;
@@ -16,18 +16,18 @@ public class Animali {
     }
 
     public String getSpecie() {
-        return specie;
+        return species;
     }
 
     public void setSpecie(String specie) {
-        this.specie = specie;
+        this.species = specie;
     }
 
     public String getSoprannome() {
-        return soprannome;
+        return nickname;
     }
 
     public void setSoprannome(String soprannome) {
-        this.soprannome = soprannome;
+        this.nickname = soprannome;
     }
 }

@@ -1,6 +1,7 @@
-import Controller.BaseRepository;
+
+import Controller.AnimalRepository;
 import Controller.ProductRepository;
-import Model.Animali;
+import Model.Animal;
 import Model.Product;
 
 
@@ -8,10 +9,11 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to PTR from product its introspaction by Reflection");
         Product product = new Product();
-        Animali animali = new Animali();
+        Animal animali = new Animal();
         ProductRepository productRepository = new ProductRepository();
-        productRepository.test(product);
-        productRepository.test(animali);
+        AnimalRepository animaliRepository = new AnimalRepository();
+        productRepository.printAttributesProperty(product);
+        animaliRepository.printAttributesProperty(animali);
     }
 
 }

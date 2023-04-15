@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Product;
 
-public class ProductRepository extends BaseRepository<Product>{
-
+public class ProductRepository extends BaseRepository<Product> {
 
 }
