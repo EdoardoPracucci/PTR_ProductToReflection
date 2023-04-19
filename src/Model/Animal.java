@@ -7,6 +7,22 @@ public class Animal {
     private boolean adopt;
     private boolean inDanger;
 
+    public Animal() {
+        this.id = 0;
+        this.species = null;
+        this.nickname = null;
+        this.adopt = false;
+        this.inDanger = false;
+    }
+
+    public Animal(int id, String species, String nickname, boolean adopt, boolean inDanger) {
+        this.id = id;
+        this.species = species;
+        this.nickname = nickname;
+        this.adopt = adopt;
+        this.inDanger = inDanger;
+    }
+
     public int getId() {
         return id;
     }
@@ -29,5 +45,16 @@ public class Animal {
 
     public void setSoprannome(String soprannome) {
         this.nickname = soprannome;
+    }
+
+    @Override
+    public String toString() {
+        return "( " +
+                id +
+                " , " + species +
+                " , " + nickname +
+                " , " + adopt +
+                " , " + inDanger +
+                ")";
     }
 }

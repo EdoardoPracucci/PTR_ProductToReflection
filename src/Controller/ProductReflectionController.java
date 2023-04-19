@@ -10,7 +10,7 @@ public class ProductReflectionController {
         propertyProductAttributes();
     }
     public static void propertyProductAttributes(){
-        Product product= new Product();
+        Product product= new Product(2,"lampada",16.30);
         Class cls = product.getClass();
         Field[] fields = cls.getDeclaredFields();
         for(int i=0;i<fields.length;i++){
