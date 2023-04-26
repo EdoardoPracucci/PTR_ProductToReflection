@@ -76,11 +76,23 @@ public class BaseRepository<T extends BaseRepositoryCompatibleModel> {
     }
 
     public void select(T obj){
+        Field[] fields = obj.getClass().getDeclaredFields();
         String sql = "select * from "+ obj.getClass().getSimpleName();
         try(Connection conn = DriverManager.getConnection(DB_URL, user, password);
             Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
         ) {
-            stmt.executeUpdate(sql);
+            System.out.println(obj.getClass().getSimpleName());
+
+            ResultSetMetaData md = rs.getMetaData();
+            int colCount = md.getColumnCount();
+            while(rs.next()) {
+
+                for(int i = 1; i <= colCount; i++) {
+                    System.out.printf("%s, ", rs.getObject(i) == null ? "NULL" : rs.getObject(i).toString());
+                }
+                System.out.printf("%n");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

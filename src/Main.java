@@ -15,9 +15,10 @@ public class Main {
         AnimalRepository animaliRepository = new AnimalRepository();
         productRepository.printAttributesProperty(product);
         animaliRepository.printAttributesProperty(animali);
-        //productRepository.insert(product);
-        animaliRepository.insert(animali);
-
+//        productRepository.insert(product);
+        productRepository.select(product);
+//        animaliRepository.insert(animali);
+        animaliRepository.select(animali);
     }
 
 }
