@@ -1,6 +1,9 @@
 package Model;
 
-public class Product {
+import java.util.HashMap;
+import java.util.Map;
+
+public class Product implements BaseRepositoryCompatibleModel{
     private int id;
     private String name;
     private double price;
@@ -46,5 +49,12 @@ public class Product {
                 ", " + name +
                 "," + price +
                 ")";
+    }
+    public Map<String, Object> getAllAttributesValue(){
+        Map<String,Object> valuesAttributes=new HashMap<>();
+        valuesAttributes.put("id",getId());
+        valuesAttributes.put("name",getName());
+        valuesAttributes.put("price",getPrice());
+        return valuesAttributes;
     }
 }

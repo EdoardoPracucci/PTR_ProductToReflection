@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.BaseRepositoryCompatibleModel;
+
 import java.lang.reflect.Field;
 import  java.lang.*;
 import java.sql.*;
@@ -7,7 +9,7 @@ import java.util.List;
 ;
 import static javax.swing.UIManager.*;
 
-public class BaseRepository<T> {
+public class BaseRepository<T extends BaseRepositoryCompatibleModel> {
     static final String DB_URL = "jdbc:mysql://localhost:3306/PTR";
     String user = "root";
     String password = "ciao1234";
@@ -19,7 +21,8 @@ public class BaseRepository<T> {
         for(int i=0;i<fields.length;i++){
             fieldString += fields[i].getName();
             System.out.println(fields[i].getName());
-            System.out.println(getInt(obj));
+            System.out.println(obj.getAllAttributesValue().get(fields[i].getName()));
+
             if(fields.length-1==i){
                 fieldString += ")" ;
 
@@ -31,7 +34,6 @@ public class BaseRepository<T> {
         System.out.println(fieldString);
         String sql = " insert into "+ obj.getClass().getSimpleName() + fieldString +" values " +obj.toString();
         System.out.println(sql);
-        System.out.println(getInt(fields[0]));
     }
 
     public void insert(T obj){
@@ -39,23 +41,28 @@ public class BaseRepository<T> {
         Field[] fields = cls.getDeclaredFields();
 
         String sql = " insert into "+ obj.getClass().getSimpleName()+ " " + this.fieldPropertyString(fields) + " values ("+this.getValuesLength(fields)+") ";
+        System.out.println(sql);
         try(Connection conn = DriverManager.getConnection(DB_URL, user, password);
             PreparedStatement pstmt = conn.prepareStatement(sql);
         )
         {
             for(int i=0;i<fields.length;i++){
-                switch (fields[i].getName()){
+                switch (fields[i].getType().getSimpleName()){
                     case "int":
-                        pstmt.setInt(i, getInt(fields[i]) );
+                        int intToInsert = (Integer)obj.getAllAttributesValue().get(fields[i].getName());
+                        pstmt.setInt(i+1 , intToInsert);
                         break;
                     case "String":
-                        pstmt.setString(i,getString(fields[i]));
+                        String stringToInsert = (String)obj.getAllAttributesValue().get(fields[i].getName());
+                        pstmt.setString(i+1 , stringToInsert );
                         break;
                     case "boolean":
-                        pstmt.setBoolean(i,getBoolean(fields[i]));
+                        boolean boolToInsert= (boolean)obj.getAllAttributesValue().get(fields[i].getName());
+                        pstmt.setBoolean(i+1, boolToInsert);
                         break;
                     case "double":
-//                        pstmt.setDouble(i,getDouble(fields[i]));
+                        double doubleToInsert= (double)obj.getAllAttributesValue().get(fields[i].getName());
+                        pstmt.setDouble(i+1,doubleToInsert);
                         break;
                 }
             }

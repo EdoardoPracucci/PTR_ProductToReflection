@@ -1,6 +1,9 @@
 package Model;
 
-public class Animal {
+import java.util.HashMap;
+import java.util.Map;
+
+public class Animal implements BaseRepositoryCompatibleModel{
     private int id;
     private String species;
     private String nickname;
@@ -31,20 +34,37 @@ public class Animal {
         this.id = id;
     }
 
-    public String getSpecie() {
+    public String getSpecies() {
         return species;
     }
 
-    public void setSpecie(String specie) {
-        this.species = specie;
+    public void setSpecie(String species) {
+        this.species = species;
     }
 
-    public String getSoprannome() {
+    public String getNickname() {
         return nickname;
     }
 
-    public void setSoprannome(String soprannome) {
-        this.nickname = soprannome;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+
+    public boolean isAdopt() {
+        return adopt;
+    }
+
+    public void setAdopt(boolean adopt) {
+        this.adopt = adopt;
+    }
+
+    public boolean isInDanger() {
+        return inDanger;
+    }
+
+    public void setInDanger(boolean inDanger) {
+        this.inDanger = inDanger;
     }
 
     @Override
@@ -56,5 +76,14 @@ public class Animal {
                 " , " + adopt +
                 " , " + inDanger +
                 ")";
+    }
+    public Map<String, Object> getAllAttributesValue(){
+        Map<String,Object> valuesAttributes=new HashMap<>();
+        valuesAttributes.put("id",getId());
+        valuesAttributes.put("species",getSpecies());
+        valuesAttributes.put("nickname",getNickname());
+        valuesAttributes.put("adopt",isAdopt());
+        valuesAttributes.put("inDanger",isInDanger());
+        return valuesAttributes;
     }
 }
